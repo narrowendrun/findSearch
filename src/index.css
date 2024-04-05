@@ -2,15 +2,39 @@ body {
   background-color: rgb(0, 139, 139);
   font-weight: 500;
 }
-#textContainer {
+#mainContainer-text{
+  position: relative;
+  margin-top: 5%;
+}
+.textWall {
+  position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 5px;
-  height: 65vh;
+  height: 75vh;
   background-color: antiquewhite;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   padding: 2%;
   text-align: justify;
-  overflow-y: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-weight: 400;
+  resize: none;
+  transition : all 0.2s ease;
+  opacity: 1;
+}
+#textWallEditor{
+  z-index: 5;
+  background-color: lightgray;
+}
+#textWallDiv{
+  z-index: -1;
+}
+img {
+  position: absolute;
+  width: 65px;
+  right: -5vw;
+  top: 0vw;
 }
 label {
   font-size: 2em;

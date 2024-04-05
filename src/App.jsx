@@ -1,45 +1,49 @@
 import { useEffect, useState } from "react";
-
+import editIcon from "./images/edit.svg";
 function App() {
   const [findText, setfindText] = useState("");
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-   
-      let wordSet = new Set();
-      const containerString = document.getElementById("textContainer");
-      let stringArray = containerString.textContent;
-      stringArray = stringArray
-        .split("\n")
-        .map((line) =>
-          line
-            .split(" ")
-            .map((word) => {
-              wordSet.add(word);
-              if (word.indexOf(findText) > -1) {
-                word = word.replace(
-                  new RegExp(findText, "gi"),
-                  `<span class="span-custom">$&</span>`
-                );
-              }
-              return word;
-            })
-            .join(" ")
-        )
-        .join("\n");
-      containerString.innerHTML = stringArray;
-      setCount(document.getElementsByClassName("span-custom").length);
-      if(findText=="") setCount(0)
-    
-  }, [findText]);
+  // Modi was born and raised in Vadnagar in northeastern Gujarat, where he completed his secondary education. He was introduced to the RSS at the age of eight. His account of helping his father sell tea at the Vadnagar railway station has not been reliably corroborated. At age 18, he was married to Jashodaben Modi, whom he abandoned soon after, only publicly acknowledging her four decades later when legally required to do so. Modi became a full-time worker for the RSS in Gujarat in 1971. The RSS assigned him to the BJP in 1985 and he held several positions within the party hierarchy until 2001, rising to the rank of general secretary.[c]
 
+  // In 2001, Modi was appointed Chief Minister of Gujarat and elected to the legislative assembly soon after. His administration is considered complicit in the 2002 Gujarat riots,[d] and has been criticised for its management of the crisis. A little over 1,000 people were killed, according to official records, three-quarters of whom were Muslim; independent sources estimated 2,000 deaths, mostly Muslim.[11] A Special Investigation Team appointed by the Supreme Court of India in 2012 found no evidence to initiate prosecution proceedings against him.[e] While his policies as chief minister, which were credited for encouraging economic growth, were praised, Modi's administration was criticised for failing to significantly improve health, poverty and education indices in the state.[f] In the 2014 Indian general election, Modi led the BJP to a parliamentary majority, the first for a party since 1984. His administration increased direct foreign investment, and it reduced spending on healthcare, education, and social-welfare programmes. Modi began a high-profile sanitation campaign, controversially initiated the 2016 demonetisation of high-denomination banknotes and introduced the Goods and Services Tax, and weakened or abolished environmental and labour laws.
+
+  // Modi's administration launched the 2019 Balakot airstrike against an alleged terrorist training camp in Pakistan. The airstrike failed,[14][15] and the deaths of six Indian personnel to friendly fire was later revealed: but the action had nationalist appeal.[16] Modi's party won the 2019 general election which followed.[17] In its second term, his administration revoked the special status of Jammu and Kashmir, an Indian-administered portion of the disputed Kashmir region,[18][19] and introduced the Citizenship Amendment Act, prompting widespread protests, and spurring the 2020 Delhi riots in which Muslims were brutalised and killed by Hindu mobs,[20][21][22] sometimes with the complicity of police forces controlled by the Modi administration.[23][24] Three controversial farm laws led to sit-ins by farmers across the country, eventually causing their formal repeal. Modi oversaw India's response to the COVID-19 pandemic, during which 4.7 million out of 1.4 billion Indians died, according to the World Health Organization's estimates.[25][26]
+
+  // Under Modi's tenure, India has experienced democratic backsliding, or the weakening of democratic institutions, individual rights, and freedom of expression.[27][28][g] As prime minister, he has received consistently high approval ratings.[34][35][36] Modi has been described as engineering a political realignment towards right-wing politics. He remains a controversial figure domestically and internationally, over his Hindu nationalist beliefs and handling of the Gujarat riots, which have been cited as evidence of a majoritarian and exclusionary social agenda.[h]`;
+  const placeholder = "sample text here";
+  const [textVal, setTextVal] = useState(placeholder);
+  function edit(x) {
+    //if x then edit mode else find mode
+    if (x) {
+      document.getElementById("textWallEditor").style.opacity = "1";
+      document.getElementById("textWallDiv").style.opacity = "0";
+      document.getElementById("textWallEditor").style.zIndex = "5";
+      document.getElementById("textWallDiv").style.zIndex = "-1";
+    } else {
+      document.getElementById("textWallEditor").style.opacity = "0";
+      document.getElementById("textWallDiv").style.opacity = "1";
+      document.getElementById("textWallEditor").style.zIndex = "-1";
+      document.getElementById("textWallDiv").style.zIndex = "0";
+    }
+  }
+  useEffect(() => {
+    if (findText !== "") {
+      edit(0);
+      let stringArray = textVal.split("\n");
+      stringArray = stringArray
+        .map((line) => {
+          return line.replace(
+            new RegExp(findText, "gi"),
+            `<span class="span-custom">$&</span>`
+          );
+        })
+        .join(" ");
+      document.getElementById("textWallDiv").innerHTML = stringArray;
+    }
+  }, [findText]);
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <div className="container">
         <div className="container" style={{ textAlign: "center" }}>
           <label htmlFor="findText">enter text to find</label>
@@ -52,80 +56,25 @@ function App() {
             id="findText"
             onChange={(e) => setfindText(e.target.value)}
             value={findText}
+            onClick={() => edit(0)}
           />
           <p id="count">{count}</p>
         </div>
-        <br />
-        <br />
-        <br />
       </div>
-      <div id="textContainer" className="container">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, alias
-        consequatur cumque quibusdam reiciendis quis molestias officia ullam
-        aliquam minus exercitationem praesentium? Fuga accusantium, molestiae
-        expedita facere voluptas repudiandae rem. Lorem, ipsum dolor sit amet
-        consectetur adipisicing elit. Iste perferendis quae nostrum enim odio
-        repudiandae itaque aspernatur magnam amet vero hic, voluptatibus saepe
-        earum, assumenda consectetur natus at. Reiciendis, laudantium? Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Minima debitis itaque
-        laboriosam? At obcaecati officia esse odit enim nulla asperiores
-        voluptatibus saepe error? Perferendis sequi, doloribus recusandae
-        veritatis rem vel! Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Repellat vel repudiandae doloribus asperiores, deleniti a
-        accusamus quidem dignissimos. Illum aliquam facilis reprehenderit
-        perferendis repellat expedita neque similique, commodi incidunt debitis?
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem
-        eligendi voluptas ducimus temporibus numquam, repellendus esse natus
-        molestias officiis ipsa, necessitatibus unde ullam eius commodi quo amet
-        provident iusto at. Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Voluptatem accusamus excepturi temporibus explicabo! Sit, nobis
-        facere necessitatibus repellendus recusandae eligendi architecto
-        corporis culpa repellat sed commodi minus libero voluptates. Neque.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias hic
-        dolores nam minima vero officiis ad, tempore distinctio molestiae
-        repellat cumque est fuga architecto quos eum voluptatum ullam reiciendis
-        nesciunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-        Tenetur adipisci nam vitae beatae architecto molestias fugiat, quas
-        laborum, impedit, nostrum quis et quibusdam ab nulla consequuntur
-        temporibus at praesentium labore. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Architecto sint doloremque quae dolore
-        ducimus aspernatur magnam, magni animi quod possimus beatae hic vero
-        quaerat, laudantium dolor, molestias aliquid minima laborum?Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Adipisci, alias consequatur
-        cumque quibusdam reiciendis quis molestias officia ullam aliquam minus
-        exercitationem praesentium? Fuga accusantium, molestiae expedita facere
-        voluptas repudiandae rem. Lorem, ipsum dolor sit amet consectetur
-        adipisicing elit. Iste perferendis quae nostrum enim odio repudiandae
-        itaque aspernatur magnam amet vero hic, voluptatibus saepe earum,
-        assumenda consectetur natus at. Reiciendis, laudantium? Lorem ipsum
-        dolor sit amet consectetur adipi sicing elit. Minima debitis itaque
-        laboriosam? At obcaecati officia esse odit enim nulla asperiores
-        voluptatibus saepe error? Perferendis sequi, doloribus recusandae
-        veritatis rem vel! Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Repellat vel repudiandae doloribus asperiores, deleniti a
-        accusamus quidem dignissimos. Illum aliquam facilis reprehenderit
-        perferendis repellat expedita neque similique, commodi incidunt debitis?
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem
-        eligendi voluptas ducimus temporibus numquam, repellendus esse natus
-        molestias officiis ipsa, necessitatibus unde ullam eius commodi quo amet
-        provident iusto at. Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Voluptatem accusamus excepturi temporibus explicabo! Sit, nobis
-        facere necessitatibus repellendus recusandae eligendi architecto
-        corporis culpa repellat sed commodi minus libero voluptates. Neque.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias hic
-        dolores nam minima vero officiis ad, tempore distinctio molestiae
-        repellat cumque est fuga architecto quos eum voluptatum ullam reiciendis
-        nesciunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-        Tenetur adipisci nam vitae beatae architecto molestias fugiat, quas
-        laborum, impedit, nostrum quis et quibusdam ab nulla consequuntur
-        temporibus at praesentium labore. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Architecto sint doloremque quae dolore
-        ducimus aspernatur magnam, magni animi quod possimus beatae hic vero
-        quaerat, laudantium dolor, molestias aliquid minima laborum? Lorem
-        ipsum, dolor sit amet consectetur adipisicing elit. Est modi alias
-        facilis accusantium enim consequatur magnam magni, molestias rem
-        molestiae, voluptate iusto explicabo incidunt voluptatibus assumenda
-        tempora ipsa ratione? Esse.
+      <div id="mainContainer-text" className="container">
+        <textarea
+          className="container textWall"
+          id="textWallEditor"
+          value={textVal}
+          onChange={(e) => setTextVal(e.target.value)}
+        ></textarea>
+        <div
+          id="textWallDiv"
+          className="container textWall"
+          onClick={() => edit(1)}
+        >
+          {textVal}
+        </div>
       </div>
     </>
   );
