@@ -1,6 +1,7 @@
 body {
   background-color: rgb(0, 139, 139);
   font-weight: 500;
+  white-space:pre-line;
 }
 #mainContainer-text{
   position: relative;

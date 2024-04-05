@@ -38,7 +38,10 @@ function App() {
             `<span class="span-custom">$&</span>`
           );
         })
-        .join(" ");
+        .join("\n");
+      console.log(stringArray);
+      let wordCount = document.getElementsByClassName("span-custom");
+      setCount(wordCount.length);
       document.getElementById("textWallDiv").innerHTML = stringArray;
     }
   }, [findText]);
